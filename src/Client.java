@@ -5,19 +5,18 @@ import java.net.*;
 import java.io.*;
 import java.util.*;
 
-public class Client	implements Runnable throws IOException{
-	public static LinkedList check=new LinkedList();
+public class Client implements Runnable{
+	public LinkedList check=new LinkedList();
 	public Queue<String> tasks=new LinkedList<String>();
 	public Socket server=null;
 	
 	public Client(Socket s){
 	server=s;
-	tasks=t;
 	}
 	
 	public void run()
-	{	PrintWriter out;
-		BufferedReader in;
+	{	PrintWriter out= null;
+		BufferedReader in = null;
 		String resp;
 		
 		try {
@@ -30,9 +29,19 @@ public class Client	implements Runnable throws IOException{
             System.err.println("Couldn't get I/O for the connection to: DH023-27.");
             System.exit(1);
         }
+		try {
+			resp=in.readLine();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		
-		while(true){
-			resp=in.getline();
+		while((resp=in.readLine())!=null){
+			try {
+				resp=in.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 			if(!check.isEmpty()){
 				if(check.contains(resp)){
 					System.out.printf("Recieved confirmation of %s",resp);

@@ -5,7 +5,7 @@ import java.net.*;
 import java.io.*;
 import java.util.*;
 
-public class SocketServer{
+public class ServerIn{
 	public static Queue<String> tasks=new LinkedList<String>();
 	
 	public static void main(String[] args) throws IOException {
@@ -28,7 +28,7 @@ public class SocketServer{
 		PrintWriter out=new PrintWriter(client.getOutputStream(), true);
 		BufferedReader in=new BufferedReader(new InputStreamReader(client.getInputStream()));
 		
-		String input,output;
+		String input;
 		
 		while ((input = in.readLine())!=null) {
 			tasks.add(input);

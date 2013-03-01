@@ -15,32 +15,31 @@ public class ClientServer{
             server = new Socket("James-PC", 4444);
             out = new PrintWriter(server.getOutputStream(), true);
         } catch (UnknownHostException e) {
-            System.err.println("Don't know about host: DH023-27.");
+            System.err.println("Don't know about host: James-PC.");
             System.exit(1);
         } catch (IOException e) {
-            System.err.println("Couldn't get I/O for the connection to: DH023-27.");
+            System.err.println("Couldn't get I/O for the connection to: James-PC.");
             System.exit(1);
         }
 		
-		Thread input=new Thread(new Client(server));
+		Thread inputC=new Thread(new Client(server));
         String task;
-		input.start();
+		inputC.start();
 		
 		BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 		String input;
 		
 		System.out.println("Ready:\n");
-		while((input=stdIn.getline())!=null){
+		while((input=stdIn.readLine())!=null){
 			out.println(input);
-			if(input.equals("DISCONNECT");
+			if(input.equals("DISCONNECT"))
 				break;
-			input.check.add(input);
+			inputC.check.add(input);
 		}
 		
-        in.close();
+		out.close();
 		stdIn.close();
-        qSocket.close();
-		return;
+		server.close();
 	}
 }	
 			
