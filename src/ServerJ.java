@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*Author: James Reinholdt
 Date: 1/26/2013
 ---------------------------------*/
@@ -5,7 +6,7 @@ import java.net.*;
 import java.io.*;
 import java.util.*;
 
-public class Server implements Runnable{
+public class ServerJ implements Runnable{
 	public Queue<String> tasks;
 	public Socket client;
 	
@@ -40,3 +41,10 @@ public class Server implements Runnable{
 		}
 	}
 }
+=======
+
+public class Server
+{
+
+}
+>>>>>>> a0cc2d6552acf6f16e403484c88ef23eb82f69fd

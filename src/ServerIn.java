@@ -28,6 +28,8 @@ public class ServerIn{
 		PrintWriter out=new PrintWriter(client.getOutputStream(), true);
 		BufferedReader in=new BufferedReader(new InputStreamReader(client.getInputStream()));
 		
+		Thread servSys= new Thread(new ServerJ());
+		servSys.run();
 		String input;
 		
 		while ((input = in.readLine())!=null) {
