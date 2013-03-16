@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*Author: James Reinholdt
 Date: 1/26/2013
 ---------------------------------*/
@@ -9,10 +8,12 @@ import java.util.*;
 public class ServerJ implements Runnable{
 	public Queue<String> tasks;
 	public Socket client;
+	public PrintWriter out;
 	
-	public Server(Socket s, Queue<String> t){
+	public ServerJ(Socket s, Queue<String> t) throws IOException{
 		client=s;
 		tasks=t;
+		out = new PrintWriter(client.getOutputStream(), true);
 	}
 	
 	public void process(String t){
@@ -20,31 +21,16 @@ public class ServerJ implements Runnable{
 	}
 	
 	public void run(){
-		PrintWriter out = null;
 		String task="";
-		try {
-            out = new PrintWriter(client.getOutputStream(), true);
-        } catch (UnknownHostException e) {
-            System.err.println("Don't know about host: DH023-27.");
-            System.exit(1);
-        } catch (IOException e) {
-            System.err.println("Couldn't get I/O for the connection to: DH023-27.");
-            System.exit(1);
-        }
 		
-		while(!task.equals("DISCONNECT")){
+		while(!task.trim().equalsIgnoreCase("DISCONNECT")){
 			if(!tasks.isEmpty()){
+				System.out.println("Task Recieved");
 				task=tasks.poll();
 				process(task);
 				out.println(task);
+				System.out.println("Sent");
 			}
 		}
 	}
 }
-=======
-
-public class Server
-{
-
-}
->>>>>>> a0cc2d6552acf6f16e403484c88ef23eb82f69fd

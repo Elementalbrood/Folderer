@@ -28,13 +28,14 @@ public class ServerIn{
 		PrintWriter out=new PrintWriter(client.getOutputStream(), true);
 		BufferedReader in=new BufferedReader(new InputStreamReader(client.getInputStream()));
 		
-		Thread servSys= new Thread(new ServerJ());
-		servSys.run();
+		Thread servSys= new Thread(new ServerJ(client,tasks));
+		servSys.start();
 		String input;
 		
+		System.out.println("Ready: ");
 		while ((input = in.readLine())!=null) {
 			tasks.add(input);
-			out.println(tasks.poll());
+			out.println(input);
 			if(input.equals("DISCONNECT"))
 				break;
         }
